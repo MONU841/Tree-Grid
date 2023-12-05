@@ -1,0 +1,76 @@
+HTML CODE
+------------------------------------------------------------
+<template>
+	<div class="slds-p-around_medium lgc-bg">
+		<lightning-tree-grid columns={gridColumns} data={gridData} key-field="name"></lightning-tree-grid>
+	</div>
+</template>
+------------------------------------------------------------
+JS CODE
+import { LightningElement, wire, track } from 'lwc';
+import makeTreeStructure from '@salesforce/apex/TreeStructure.makeTreeStructure';
+export const EXAMPLES_COLUMNS_DEFINITION_BASIC = [
+    {
+        type: 'text',
+        fieldName: 'accountName',
+        label: 'Account Name',
+        initialWidth: 300,
+    },
+    {
+        type: 'text',
+        fieldName: 'accountNumber',
+        label: 'Account Number',
+    },
+    {
+        type: 'url',
+        fieldName: 'website',
+        label: 'Website'
+    }
+];
+
+export default class TreeGrid extends LightningElement {
+    gridColumns = EXAMPLES_COLUMNS_DEFINITION_BASIC;
+    @track gridData = [];
+
+    @wire(makeTreeStructure)
+    accountDynamicTree({ error, data }) {
+        if (data) {
+            this.generateTreeStructure(data);
+        } else if (error) {
+            console.log('WireMethodExample error: ', error)
+        }
+    };
+
+    generateTreeStructure(data) {
+        let tempItems = [];
+        data.forEach(currentItem => {
+            let contactsItems = [];
+            this.isContacts = currentItem.Contacts ? true : false;
+            if (this.isContacts) {
+                currentItem.Contacts.forEach(con => {
+                    contactsItems.push({ name: con.Name, accountName: con.Name, accountNumber: con.Phone, website: con.Email });
+                });
+            }
+            tempItems.push({ name:currentItem.Name, accountName: currentItem.Name, accountNumber: currentItem.AccountNumber, website: currentItem.Website, _children: contactsItems });
+            contactsItems = [];
+        });
+        this.gridData = tempItems;
+    }
+}
+----------------------------------------------------------------
+
+APEX CODE
+-----------------------------------------------------------
+public class TreeStructure {
+    @AuraEnabled(cacheable=true)
+    public static list<Account> makeTreeStructure(){
+        RETURN [SELECT Id, Name, AccountNumber, Website,
+                (SELECT Id, Name, Phone, Email  FROM Contacts WHERE Name != NULL AND AccountId != NULL)
+                FROM Account WHERE Name != NULL AND AccountNumber != NULL
+                AND Website != NULL LIMIT 5];
+    }
+}
+------------------------------------------------------------
+
+
+
