@@ -1,0 +1,201 @@
+----------------------------- HTML CODE -----------------------------------
+<template>
+	<div class="slds-card__header slds-card_boundary" style="background: white;">
+		<div class="slds-grid slds-gutters slds-wrap ">
+			<div class="slds-col slds-size_12-of-12 slds-text-heading_small slds-m-left_small psoidexheading  ">
+				Applicant Details: </div>
+			<div class="slds-col slds-size_12-of-12"> <span> &nbsp;</span></div>
+			<div class="slds-col slds-size_9-of-12">
+				<div class="slds-grid slds-gutters slds-wrap">
+					<template if:true={loanApplicantPosidexInfo}>
+						<div
+							class="slds-col slds-size_3-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<span class="slds-p-left_xx-large">Applicant Name</span>
+						</div>
+						<div
+							class="slds-col slds-size_3-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<template if:true={loanApplicantPosidexInfo.currentRequestDetails.applicantName}>
+								<span>: &nbsp; {loanApplicantPosidexInfo.currentRequestDetails.applicantName} </span>
+							</template>
+							<template if:false={loanApplicantPosidexInfo.currentRequestDetails.applicantName}>
+								<span>: &nbsp; </span>
+							</template>
+						</div>
+						<div class="slds-col slds-size_1-of-12 slds-p-bottom_xx-small">
+							<span></span>
+						</div>
+
+						<div
+							class="slds-col slds-size_2-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<span class="slds-p-left_large">DOB/DOI</span>
+						</div>
+						<div
+							class="slds-col slds-size_3-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<template if:true={loanApplicantPosidexInfo.currentRequestDetails.applicantDOB}>
+								<span >: &nbsp; {loanApplicantPosidexInfo.currentRequestDetails.applicantDOB} </span>
+							</template>
+							<template if:false={loanApplicantPosidexInfo.currentRequestDetails.applicantDOB}>
+								<span>: &nbsp;  </span>
+							</template>
+						</div>
+
+
+						<div
+							class="slds-col slds-size_3-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<span class="slds-p-left_xx-large">CIN/DIN</span>
+						</div>
+						<div
+							class="slds-col slds-size_3-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<template if:true={loanApplicantPosidexInfo.currentRequestDetails.applicantCINDIN}>
+								<span>: &nbsp; {loanApplicantPosidexInfo.currentRequestDetails.applicantCINDIN} </span>
+							</template>
+							<template if:false={loanApplicantPosidexInfo.currentRequestDetails.applicantCINDIN}>
+								<span>: &nbsp; </span>
+							</template>
+						</div>
+						<div class="slds-col slds-size_1-of-12 slds-p-bottom_xx-small">
+							<span></span>
+						</div>
+
+						<div
+							class="slds-col slds-size_2-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<span class="slds-p-left_large">PAN</span>
+						</div>
+						<div
+							class="slds-col slds-size_3-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<template if:true={loanApplicantPosidexInfo.currentRequestDetails.applicantPan}>
+								<span>: &nbsp; {loanApplicantPosidexInfo.currentRequestDetails.applicantPan} </span>
+							</template>
+							<template if:false={loanApplicantPosidexInfo.currentRequestDetails.applicantPan}>
+								<span>: &nbsp; </span>
+							</template>
+						</div>
+
+						<div
+							class="slds-col slds-size_3-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<span class="slds-p-left_xx-large">Address</span>
+						</div>
+						<div
+							class="slds-col slds-size_3-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<template if:true={loanApplicantPosidexInfo.currentRequestDetails.applicantAddress}>
+								<span>:<span class="addressspan">{loanApplicantPosidexInfo.currentRequestDetails.applicantAddress}</span></span>
+							</template>
+							<template if:false={loanApplicantPosidexInfo.currentRequestDetails.applicantAddress}>
+								<span>: &nbsp; </span>
+							</template>
+						</div>
+						<div class="slds-col slds-size_1-of-12 slds-p-bottom_xx-small">
+							<span></span>
+						</div>
+
+						<div
+							class="slds-col slds-size_2-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<span class="slds-p-left_large">Phone Number</span>
+						</div>
+						<div
+							class="slds-col slds-size_3-of-12 slds-text-heading_medium slds-text-title_bold slds-p-bottom_xx-small">
+							<template if:true={loanApplicantPosidexInfo.currentRequestDetails.applicantPhoneNumber}>
+								<span>: &nbsp; {loanApplicantPosidexInfo.currentRequestDetails.applicantPhoneNumber} </span>
+							</template>
+							<template if:false={loanApplicantPosidexInfo.currentRequestDetails.applicantPhoneNumber}>
+								<span>: &nbsp; </span>
+							</template>
+						</div>
+					</template>
+				</div>
+			</div>
+
+			<div class="slds-col slds-size_3-of-12">
+				<template if:false={isBorrowerDedupeInProgrss}>
+					<template if:false={hasPosidexResults}>
+						<div class="slds-text-align_right">
+							<lightning-button-icon icon-name="utility:refresh" class="slds-m-right_large">
+							</lightning-button-icon>
+						</div>
+					</template>
+
+					<template if:true={hasPosidexResults}>
+						<div class="slds-text-align_right">
+							<lightning-button-icon icon-name="utility:refresh" class="slds-m-right_large">
+							</lightning-button-icon>
+						</div>
+					</template>
+
+
+				</template>
+				<template if:true={isBorrowerDedupeInProgrss}>
+					<lightning-button-icon icon-name="utility:refresh" class="slds-float_right slds-m-right_x-large"
+						alternative-text="Refresh" title="Refresh" onclick={handleRefresh}></lightning-button-icon>
+				</template>
+
+			</div>
+			<div class="slds-col slds-size_12-of-12"> <span> &nbsp;</span></div>
+			<div class="slds-col slds-size_12-of-12"> <span> &nbsp;</span></div>
+			<div class="slds-col slds-size_12-of-12 slds-text-heading_small  slds-m-left_small psoidexheading  ">Match
+				Details: </div>
+			<div class="slds-col slds-size_12-of-12"> <span> &nbsp;</span></div>
+			<template if:true={hasPosidexResults}>
+				<div class="slds-col slds-size_12-of-12 slds-m-left_small">
+					<span>Match Count: {posidexMatchResultsCount}</span>
+				</div>
+			</template>
+
+			<div class="slds-col slds-size_12-of-12">
+				<div class="slds-m-around_x-small">
+
+					<lightning-datatable key-field="customerId" data={loanApplicantDemographics} columns={tableColumns}
+						onrowaction={handleRowAction} hide-checkbox-column resize-column-disabled>
+					</lightning-datatable>
+
+				</div>
+
+				<template if:true={isBorrowerDedupeInProgrss}>
+					<b class="apple-font slds-p-around_small slds-align_absolute-center"
+                            style=" color:#FF538A; font-size:12px;">{awaitingDisplay}</b>
+				</template>
+
+				<template if:false={hasPosidexResults}>
+					<b if:false={isBorrowerDedupeInProgrss} class="apple-font slds-p-around_small slds-align_absolute-center"
+                            style=" color:#444444; font-size:12px;">{noRecToDisplay}
+                            </b>
+				</template>
+				<div class="slds-col slds-size_12-of-12"> <span> &nbsp;</span></div>
+				<div class="slds-col slds-size_12-of-12"> <span> &nbsp;</span></div>
+			</div>
+		</div>
+	</div>
+</template>
+
+-------------------------------------------------------------------------
+----------------------------- JS CODE -----------------------------------
+import { LightningElement, track } from 'lwc';
+const COLUMNS = [
+    { label: 'CIF Id',  fieldName: 'customerId', editable: false, hideDefaultActions: true },
+    { label: 'Name',  fieldName: 'name', editable: false, hideDefaultActions: true },
+    { label: 'PAN',  fieldName: 'pan', editable: false, hideDefaultActions: true },
+    { label: 'DOB/DOI',  fieldName: 'dateOfBirth', editable: false, hideDefaultActions: true,  wrapText: true},
+    { label: 'Mobile Number',  fieldName:'contactNumbers', editable: false, hideDefaultActions: true },
+    { label: 'Reason Match',  fieldName:'reasonMatch',  editable: false, hideDefaultActions: true },
+    { label: 'CIF Type',  fieldName:'cifType',editable: false, hideDefaultActions: true },
+    { label: 'CIF Status',  fieldName:'cifStatus',editable: false, hideDefaultActions: true },
+    { label: 'Surviving CIF',  fieldName:'isServivingCIF', type: 'boolean', editable: false, hideDefaultActions: true, cellAttributes: { alignment: 'center' }, },
+    { label: 'Edit', type: 'button', typeAttributes: { label: 'Edit', name: 'Edit', variant: 'base', iconName: { fieldName: 'buttonIcon' }}, hideDefaultActions: true } 
+];
+
+export default class AxiswcLoanApplicantRiskPosidexDetails extends LightningElement {
+
+    @track tableColumns = COLUMNS;
+    @track isBorrowerDedupeInProgrss = true;
+    @track loanApplicantPosidexInfo = {
+        currentRequestDetails: {
+            applicantName: 'Test Application',
+            applicantDOB: 1980 - 11 - 21,
+            applicantCINDIN: 5678943564789,
+            applicantPan: 'AMYPG8527K',
+            applicantAddress: 'H.No:12, Street No:2 Hyderabad Telangana India 500030,WaveRock Building Hyderabad Telangana India 500050',
+            applicantPhoneNumber: 9893563458
+        }
+    };
+    awaitingDisplay = 'AWAITING FOR LATEST RESULTS PLEASE REFRESH AFTER SOMETIME';
+}
+-----------------------------------------------------------------------------------
